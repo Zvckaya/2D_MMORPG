@@ -32,10 +32,31 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void UpdatePosition()
+    //이동가능한 상태일때 실제로 이동 
+     void UpdatePosition()
     {
+        if (_isMoving == false)
+            return;
+
+        Vector3 destPos = _grid.CellToWorld(_cellPos) + new Vector3(0.5f, 0.5f); //서버위치
+        Vector3 moveDir = destPos - transform.position; 
+
+        float dist = moveDir.magnitude; //방향벡터의 크기, 즉 얼마나 남았는가?
+        if(dist< _speed * Time.deltaTime)  //사실상 도착했는가? 
+        {
+            transform.position = destPos;
+            _isMoving = false;
+        }
+        else
+        {
+            transform.position += moveDir.normalized * _speed * Time.deltaTime; //너무 스피드가 빠르면 그 이상 갈 수도 있음 
+            _isMoving = true;
+        }
+         
     }
 
+
+    //실질적 이동 
     void UpdateIsMoving()
     {
         if (_isMoving == false)
@@ -62,6 +83,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //키보드 입력을 받아 방향 설정 
     void GetDirInput()
     {
         if (Input.GetKey(KeyCode.W))
