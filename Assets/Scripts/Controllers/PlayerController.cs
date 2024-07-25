@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,20 +7,59 @@ using static Define;
 
 public class PlayerController : MonoBehaviour
 {
+    public Grid _grid;
     float _speed = 5.0f;
 
+    Vector3Int _cellPos = Vector3Int.zero;
     MoveDir _dir = MoveDir.None;
+    bool _isMoving = false;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        Vector3 pos = _grid.CellToWorld(_cellPos)+ new Vector3(0.5f,0.5f);
+        transform.position = pos;
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+        GetDirInput();
+        UpdatePosition();
+        UpdateIsMoving();
+        
+
+    }
+
+    private void UpdatePosition()
+    {
+    }
+
+    void UpdateIsMoving()
+    {
+        if (_isMoving == false)
+        {
+            switch (_dir)
+            {
+                case MoveDir.Up:
+                    _cellPos += Vector3Int.up;
+                    _isMoving = true;
+                    break;
+                case MoveDir.Down:
+                    _cellPos += Vector3Int.down;
+                    _isMoving = true;
+                    break;
+                case MoveDir.Left:
+                    _cellPos += Vector3Int.left;
+                    _isMoving = true;
+                    break;
+                case MoveDir.Right:
+                    _cellPos += Vector3Int.right;
+                    _isMoving = true;
+                    break;
+            }
+        }
     }
 
     void GetDirInput()
