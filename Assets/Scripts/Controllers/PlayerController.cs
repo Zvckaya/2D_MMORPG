@@ -84,11 +84,16 @@ public class PlayerController : MonoBehaviour
         UpdatePosition();
         UpdateIsMoving();
         
-
     }
 
+    private void LateUpdate()
+    {
+        Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
+    }
+
+
     //이동가능한 상태일때 실제로 이동 
-     void UpdatePosition()
+    void UpdatePosition()
     {
         if (_isMoving == false)
             return;
@@ -114,26 +119,30 @@ public class PlayerController : MonoBehaviour
     //실질적 이동 
     void UpdateIsMoving()
     {
-        if (_isMoving == false)
+        if (_isMoving == false &&_dir != MoveDir.None)
         {
+            Vector3Int destPos = _cellPos;
             switch (_dir)
             {
                 case MoveDir.Up:
-                    _cellPos += Vector3Int.up;
-                    _isMoving = true;
+                    destPos += Vector3Int.up;
                     break;
-                case MoveDir.Down:
-                    _cellPos += Vector3Int.down;
-                    _isMoving = true;
+                case MoveDir.Down:  
+                    destPos += Vector3Int.down;
                     break;
                 case MoveDir.Left:
-                    _cellPos += Vector3Int.left;
-                    _isMoving = true;
+                    destPos += Vector3Int.left;
                     break;
                 case MoveDir.Right:
-                    _cellPos += Vector3Int.right;
-                    _isMoving = true;
+                    destPos += Vector3Int.right;
                     break;
+            }
+
+            if (Managers.Map.CanGo(destPos))
+            {
+                _cellPos = destPos;
+                Debug.Log($"player move{destPos.ToString()}");
+                _isMoving = true;
             }
         }
     }
