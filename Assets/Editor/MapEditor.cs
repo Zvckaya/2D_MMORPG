@@ -30,14 +30,14 @@ public class MapEditor
 
             using (var writer = File.CreateText($"Assets/Resources/Map/{go.name}.txt"))
             {
-                writer.WriteLine(tmBase.cellBounds.xMin);
-                writer.WriteLine(tmBase.cellBounds.xMax);
-                writer.WriteLine(tmBase.cellBounds.yMin);
-                writer.WriteLine(tmBase.cellBounds.yMax);
+                writer.WriteLine(_tm.cellBounds.xMin);
+                writer.WriteLine(_tm.cellBounds.xMax);
+                writer.WriteLine(_tm.cellBounds.yMin);
+                writer.WriteLine(_tm.cellBounds.yMax);
 
-                for (int y = tmBase.cellBounds.yMax; y >= tmBase.cellBounds.yMin; y--)
+                for (int y = _tm.cellBounds.yMax; y >= _tm.cellBounds.yMin; y--)
                 {
-                    for (int x = tmBase.cellBounds.xMin; x <= tmBase.cellBounds.xMax; x++)
+                    for (int x = _tm.cellBounds.xMin; x <= _tm.cellBounds.xMax; x++)
                     {
                         TileBase tile = _tm.GetTile(new Vector3Int(x, y, 0));
                         if (tile != null)
