@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     float _speed = 5.0f;
 
     Vector3Int _cellPos = Vector3Int.zero;
-    MoveDir _dir = MoveDir.None;
+    MoveDir _dir = MoveDir.Down;
     bool _isMoving = false;
     Animator _animator;
 
@@ -26,11 +26,11 @@ public class PlayerController : MonoBehaviour
             switch (value)
             {
                 case MoveDir.Up:
-                    _animator.Play("WALK_UP");
+                    _animator.Play("WALK_DOWN");
                     transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                     break;
                 case MoveDir.Down:
-                    _animator.Play("WALK_DOWN");
+                    _animator.Play("WALK_UP");
                     transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                     break;
                 case MoveDir.Left:
