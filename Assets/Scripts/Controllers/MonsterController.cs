@@ -1,18 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
-public class MonsterController : MonoBehaviour
+public class MonsterController : CreatureController
 {
     // Start is called before the first frame update
-    void Start()
+    protected override void Init()
     {
-        
+        base.Init();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void UpdateController()
     {
-        
+        // GetDirInput();
+        base.UpdateController();
     }
+
+ 
+    //키보드 입력을 받아 방향 설정 
+    //void GetDirInput()
+    //{
+    //    if (Input.GetKey(KeyCode.W))
+    //    {
+    //        //transform.position += Vector3.up * Time.deltaTime * _speed;
+    //        Dir = MoveDir.Up;
+    //    }
+    //    else if (Input.GetKey(KeyCode.S))
+    //    {
+    //        //transform.position += Vector3.down * Time.deltaTime * _speed;
+    //        Dir = MoveDir.Down;
+    //    }
+    //    else if (Input.GetKey(KeyCode.A))
+    //    {
+    //        //transform.position += Vector3.left * Time.deltaTime * _speed;
+    //        Dir = MoveDir.Left;
+    //    }
+    //    else if (Input.GetKey(KeyCode.D))
+    //    {
+    //        //transform.position += Vector3.right * Time.deltaTime * _speed;
+    //        Dir = MoveDir.Right;
+    //    }
+    //    else
+    //    {
+    //        Dir = MoveDir.None;
+    //    }
+    //}
 }
