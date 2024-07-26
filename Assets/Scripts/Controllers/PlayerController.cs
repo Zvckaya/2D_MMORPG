@@ -7,7 +7,7 @@ using static Define;
 
 public class PlayerController : MonoBehaviour
 {
-    public Grid _grid;
+    
     float _speed = 5.0f;
 
     Vector3Int _cellPos = Vector3Int.zero;
@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _animator = GetComponent<Animator>();
-        Vector3 pos = _grid.CellToWorld(_cellPos)+ new Vector3(0.5f,0.5f);
+        Vector3 pos = Managers.Map.CurrentGrid.CellToWorld(_cellPos)+ new Vector3(0.5f,0.5f);
         transform.position = pos;
 
     }
@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
         if (_isMoving == false)
             return;
 
-        Vector3 destPos = _grid.CellToWorld(_cellPos) + new Vector3(0.5f, 0.5f); //서버위치
+        Vector3 destPos = Managers.Map.CurrentGrid.CellToWorld(_cellPos) + new Vector3(0.5f, 0.5f); //서버위치
         Vector3 moveDir = destPos - transform.position; 
 
         float dist = moveDir.magnitude; //방향벡터의 크기, 즉 얼마나 남았는가?
